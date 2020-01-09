@@ -16,4 +16,8 @@ class Service extends Model
     public function invitations() {
       return $this->hasMany(\App\Invitation::class);
     }
+    //
+    public function category() {
+      return $this->hasMany(\App\ServiceCategory::class);
+    }
 }

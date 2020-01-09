@@ -13,8 +13,16 @@
       <span class="inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker mr-2">#Nakuru</span>
       <span class="inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker">#Kisumu</span>
     </div>
-    <a href="{{route('invite',$id)}}" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent mx-10 my-4 rounded">
-Invite
+    <div class=" mx-4 px-2 py-1">
+    200 views
+    </div>
+<div class="d-flex justify-between">
+  <a href="{{route('invite',$id)}}" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 m-2 px-4 border border-blue-500 hover:border-transparent mx-5 my-4 rounded">
+View
 </a>
+<a href="{{route('invite',$id)}}" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-3 m-2 border border-blue-500 hover:border-transparent mx-5 my-4 rounded">
+Contact
+</a>
+</div>
   </div>
 </div>

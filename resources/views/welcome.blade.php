@@ -6,15 +6,29 @@
 >
   <div class="container mx-auto px-6">
     <h2 class="text-4xl font-bold mb-2 text-white">
-      FIND YOUR EVENT SERVICES HERE
+    BUY or SELL  event services here
     </h2>
     <h3 class="text-2xl mb-8 text-gray-200">
     Over thousand event service providers
     </h3>
+@guest
+<a href={{route('register')}} class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider">
+  Become a vendor
+</a>
+<a href={{route('post-event')}} class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider">
+Post an event
+</a>
+@else
+<a href={{route('post-event')}} class="bg-red-400 font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider">
+Post an event
+</a>
+<a href={{route('frontend.dashboard')}} class="bg-red-400 font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider">
+Dashboard
+</a>
+@endguest
 
-    <button class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider">
-      Get Started
-    </button>
+
+
   </div>
 </div>
 
@@ -47,4 +61,7 @@
 
 
 </div>
+<a href={{route('services')}} class="mx-auto w-20 bg-teal font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider">
+  View All Services
+</a>
 @endsection

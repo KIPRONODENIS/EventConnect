@@ -8,7 +8,11 @@ use Faker\Generator as Faker;
 $factory->define(Service::class, function (Faker $faker) {
     return [
         //
-        'title'=>$faker->title,
+        'title'=>function(){
+          $data=['Wedding gown','Tent Renting','Conference Material',' Wedding card printing'];
+         return $data[array_rand($data)];
+        },
+        'service_category_id'=> factory(\App\ServiceCategory::class)->create()->id,
         'image'=>'/images/test.png',
         'description'=>$faker->text(30)
 

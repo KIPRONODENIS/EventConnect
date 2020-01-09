@@ -4,11 +4,11 @@
 <div class="flex flex-wrap mx-3 overflow-hidden py-4">
   <div class=" w-1/6">
     <h1 class="font-bold text-teal-500  p-3 shadow"> Categories</h1>
-<ul class=="block border-teal-700 my-3">
-<li class="my-3"><a href="#" class="text-blue-700 visited:bg-red-700">Catering</a> </li>
-<li class="my-3"><a href="#" class="text-blue-700 visited:bg-red-700">Hall Renting</a> </li>
-<li class="my-3"><a href="#" class="text-blue-700 visited:bg-red-700">Supplies</a> </li>
-<li class="my-3"><a href="#" class="text-blue-700 visited:bg-red-700">Conference materials</a> </li>
+<ul class="block border-teal-700 my-3">
+@foreach($categories as $item)
+
+<li class="my-3"><a href="{{route('services',$item->id)}}" class="text-blue-700 visited:bg-red-700">{{$item->name}}</a> </li>
+@endforeach
 
 
 </ul>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Invitation;
 use Illuminate\Http\Request;
 use App\User;
-
+use App\Event;
 class InvitationController extends Controller
 {
     /**
@@ -27,7 +27,8 @@ class InvitationController extends Controller
      */
     public function create()
     {
-
+    $id=request()->id;
+  return view('invite',compact('id'));
     }
 
     /**
@@ -39,13 +40,24 @@ class InvitationController extends Controller
     public function store(Request $request)
     {
       //create an event
-      //Get the logged in user id
-      return  $invitation=Invitation::create([
-          'invited_by'=>'2',
-          'service_id'=>'2',
-          'event_id'=>factory(\App\Event::class)->create()->id
+      $event=Event::create(request()->except('service_id'));
 
+      //Create a new invitation and pass in the seevice id and logged in user id
+       $invitation=new Invitation([
+          'invited_by'=>Auth()->id(),
+          'service_id'=>request()->service_id
       ]);
+      //use the relationship of event-invitation relatonship to save the invitation
+     $saved=$event->invitations()->save($invitation);
+
+//checks of its succesful and the set the session
+      if($saved) {
+        //find out the invitaed user
+
+        session()->flash('success',"You have {$saved->service->user->name} to provide  {$saved->service->title}");
+      }
+
+      return redirect()->back();
     }
 
     /**
@@ -56,7 +68,8 @@ class InvitationController extends Controller
      */
     public function show(Invitation $invitation)
     {
-        //
+      //return the invitation of the id
+      return $invitation;
     }
 
     /**
@@ -67,7 +80,8 @@ class InvitationController extends Controller
      */
     public function edit(Invitation $invitation)
     {
-        //
+      //return the invitation to be edited
+      return view('invitation.edit',compact('invitation'));
     }
 
     /**
@@ -79,7 +93,13 @@ class InvitationController extends Controller
      */
     public function update(Request $request, Invitation $invitation)
     {
-        //
+      //select the event related
+
+      //push the changes with input
+
+      //validate the request and update
+
+      //  $invitation->update([$request]);
     }
 
     /**
@@ -91,5 +111,6 @@ class InvitationController extends Controller
     public function destroy(Invitation $invitation)
     {
         //
+        $invitation->delete();
     }
 }
