@@ -12,7 +12,7 @@ class Event extends Model
       return $this->hasMany(\App\Invitation::class);
     }
 
-    public function users() {
-    return $this->belongsToMany(\App\User::class)->withTimestamps();
+    public function user() {
+    return $this->belongsTo(\App\User::class);
     }
 }

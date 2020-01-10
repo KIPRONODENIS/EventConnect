@@ -35,8 +35,9 @@ Route::get('/register',function(){
   return view('register');
 })->name('register');
 //Route to invite
-Route::get('/invite/{id}', 'InvitationController@create')->middleware('auth')->name('invite');
+Route::get('/invite/{id}/{new?}', 'InvitationController@create')->middleware('auth')->name('invite');
 //post route to invite
+Route::post('/event', 'EventController@store')->name('event.create');
 Route::post('/invite', 'InvitationController@store')->name('invite.create');
 //route to show invitation page
 Route::get('/invitation',function(){
@@ -54,8 +55,7 @@ Route::get('/profile',function(){
 
   return view('profile');
 })->name('profile');
-//Authentication routes
-Auth::routes();
+
 //Route to landing page
 Route::get('/home', 'HomeController@index')->name('home');
 //Test route
@@ -64,3 +64,11 @@ Route::get('test','AccountController@update');
 Route::get('post-event', function(){
   return "Hallo I will be posting evnt here";
 })->name('post-event');
+
+//route to view each service
+Route::get('/view/{service}', 'ServicesController@view')->name('view');
+//route to contact each user
+Route::get('/contact/{service}', 'UserController@contact')->name('contactuser');
+
+//Authentication routes
+Auth::routes();

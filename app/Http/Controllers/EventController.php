@@ -35,7 +35,28 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+      //do validation Here first
+      $validated=$request->validate([
+        'title'=>'required|min:3|max:40',
+        'location'=>'required|min:2|max:20',
+        'event_date'=>'required|date',
+        'description'=>'required|min:10|max:150'
+
+      ]);
+
+      //create an event using logged un user
+      $event=new \App\Event($validated);
+     $event= \Auth::user()->events()->save($event);
+      session()->flash('success','Successfully created an event');
+      //set the session events to false
+      session()->put('events',false);
+      //get the id
+     $id=$request->service_id;
+    //determine the new parameter
+     $events=\Auth::user()->events;
+
+  return view('invite',compact('id','events'));
     }
 
     /**

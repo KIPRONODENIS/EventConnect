@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Service;
+use App\Models\Service as services;
 use Illuminate\Http\Request;
 use App\ServiceCategory;
 
@@ -16,7 +16,7 @@ class ServicesController extends Controller
     public function index()
     {
         //
-        $services=Service::orderBy('id','desc')->take(6)->get();
+        $services=services::orderBy('id','desc')->take(6)->get();
         return view('welcome',compact('services'));
     }
 
@@ -29,7 +29,7 @@ class ServicesController extends Controller
     {
         //
 
-        $allServices=$category==null?Service::orderBy('id','desc')->paginate(6):ServiceCategory::find($category)->services()->paginate(6);
+        $allServices=$category==null?services::orderBy('id','desc')->paginate(6):ServiceCategory::find($category)->services()->paginate(6);
 
         $categories=\App\ServiceCategory::all();
         return view('services',compact('allServices','categories'));
@@ -99,5 +99,16 @@ class ServicesController extends Controller
     public function destroy(services $services)
     {
         //
+    }
+    /**
+     * View  the specified service from storage.
+     *
+     * @param  \App\Models\services  $services
+     * @return \Illuminate\Http\Response
+     */
+    public function view(services $service)
+    {
+
+      return view('User.profile', compact('service'));
     }
 }

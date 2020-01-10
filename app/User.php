@@ -49,6 +49,6 @@ class User extends \TCG\Voyager\Models\User
       return $this->belongsToMany(\App\Account::class)->withTimestamps();
     }
     public function events() {
-    return $this->belongsToMany(\App\Event::class)->withTimestamps();
+    return $this->hasMany(\App\Event::class);
     }
 }

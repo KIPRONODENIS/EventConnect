@@ -12,6 +12,8 @@ use Faker\Generator as Faker;
 
           return 'Hallo event';
         },
+        'user_id'=>1,
+        'location'=>'Nairobi',
         'event_date'=>new DateTime(),
         'description'=>$faker->paragraph
     ];

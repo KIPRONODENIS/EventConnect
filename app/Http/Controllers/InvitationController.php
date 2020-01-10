@@ -27,9 +27,26 @@ class InvitationController extends Controller
      */
     public function create()
     {
+      //get the id
     $id=request()->id;
-  return view('invite',compact('id'));
+    //determine the new parameter
+    $new=request('new');
+  $events=\Auth::user()->events;
+
+    if($new) {
+     session()->put('events',true);
+     request()->session()->forget('success');
+   }else {
+      session()->put('events',false);
+   }
+
+
+
+
+  return view('invite',compact('id','events'));
     }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -39,25 +56,45 @@ class InvitationController extends Controller
      */
     public function store(Request $request)
     {
-      //create an event
-      $event=Event::create(request()->except('service_id'));
 
-      //Create a new invitation and pass in the seevice id and logged in user id
-       $invitation=new Invitation([
-          'invited_by'=>Auth()->id(),
-          'service_id'=>request()->service_id
-      ]);
-      //use the relationship of event-invitation relatonship to save the invitation
-     $saved=$event->invitations()->save($invitation);
+     //recieve the event //
+     $event=\App\Event::find($request->event);
+
+//determine if that exist
+ $exist=\App\Invitation::where([
+    'invited_by'=>Auth()->id(),
+      'event_id'=>$event->id,
+    'service_id'=>$request->service_id
+])->first();
+
+if(empty($exist)) {
+  //Create a new invitation and pass in the seevice id and logged in user id
+   $invitation=new Invitation([
+      'invited_by'=>Auth()->id(),
+
+      'service_id'=>$request->service_id
+  ]);
+  //use the relationship of event-invitation relatonship to save the invitation
+ $saved=$event->invitations()->save($invitation);
 
 //checks of its succesful and the set the session
-      if($saved) {
-        //find out the invitaed user
+  if($saved) {
+    //find out the invitaed user
 
-        session()->flash('success',"You have {$saved->service->user->name} to provide  {$saved->service->title}");
-      }
+    session()->flash('success',"You have successfully invite {$saved->service->user->name} to provide  {$saved->service->title} in your {$event->title}");
+  }
+}else {
+session()->flash('success','Already invited');
+}
 
-      return redirect()->back();
+
+      session()->put('events',false);
+      //get the id
+     $id=$request->service_id;
+    //determine the new parameter
+     $events=\Auth::user()->events;
+
+  return view('invite',compact('id','events'));
     }
 
     /**

@@ -1,56 +1,46 @@
 @extends('layouts.app')
 
 @section('body')
+<div class="d-flex py-5 mx-4">
+<div class="col-4 p-3 " >
+<h1 class="text-teal-700 uppercase m-3">Select the event</h1>
+<form method="post" action="{{route('invite.create')}}">
+  {{csrf_field()}}
+<input type="hidden" name="service_id" value="{{$id}}">
+<select name="event" class="form-control m-3 pr-3 lineHeight-40">
+ @empty($events)
+  <option>Non selected</option>
+  @endempty
+  @if(!empty($events))
+ @foreach($events as $event)
+  <option value="{{$event->id}}">{{$event->title}}</option>
+  @endforeach
 
-@component('components.form-master')
+  @else
+    <option>No event</option>
+  @endif
+</select>
 
-  <h1 class="text-md text-cyan">Invite Dennis to provide Mceeing service in your event</h1>
-  <div class="md:w-2/3">
-    <input type="hidden" name="service_id" value="{{$id}}">
-  </div>
+<button type="submit" class="btn btn-primary m-3">Send Invitation</button>
+@unless(session('events')==true)
+<a  href="{{route('invite',[$id,'new'])}}" class="btn btn-primary m-3">Add event</a>
 
-  <div class="md:flex md:items-center mb-6">
-    <div class="md:w-1/3">
-      <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
-        Event Title
-      </label>
-    </div>
-    <div class="md:w-2/3">
-      <input name="title" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name" type="text" placeholder="Wedding show">
-    </div>
-  </div>
-  <div class="md:flex md:items-center mb-6">
-    <div class="md:w-1/3">
-      <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
-        Event Date
-      </label>
-    </div>
-    <div class="md:w-2/3">
-      <input name="event_date" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-full-name" type="date" placeholder="12/12/2019">
-    </div>
-  </div>
+@endunless
+</form>
 
-  <div class="md:flex md:items-center mb-6">
-    <div class="md:w-1/3">
-      <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-username">
-        Brief description:
-      </label>
-    </div>
-    <div class="md:w-2/3">
-      <textarea name="description" rows="5" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" id="inline-username" type="password" placeholder="******************">
-      </textarea>
-    </div>
-  </div>
+</div>
+<div class="col-6" >
+  @if(session()->has('success'))
+  <div class="alert alert-success">{{session('success')}}</div>
+  @endif
+  @if($errors->any())
+  @foreach($errors as $error)
+  <div class="alert alert-danger">{{$error}}</div>
+  @endforeach
+  @endif
+@includeWhen(session('events')==true,'components.invite-form')
+</div>
+</div>
 
-  <div class="md:flex md:items-center">
-    <div class="md:w-1/3"></div>
-    <div class="md:w-2/3">
-      <button type="submit" class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
-        Invite
-      </button>
-    </div>
-  </div>
-
-@endcomponent
 
 @endsection
