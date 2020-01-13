@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service as services;
 use Illuminate\Http\Request;
+use App\Like ;
 use App\ServiceCategory;
 
 class ServicesController extends Controller
@@ -16,7 +17,8 @@ class ServicesController extends Controller
     public function index()
     {
         //
-        $services=services::orderBy('id','desc')->take(6)->get();
+        $services=services::orderBy('id','desc')->with('views')->take(6)->get();
+
         return view('welcome',compact('services'));
     }
 
@@ -108,7 +110,32 @@ class ServicesController extends Controller
      */
     public function view(services $service)
     {
+    //FIND THE USER WHO OWNS THE Service
+    $services=$service->user->services()->with('views')->orderBy('created_at','desc')->take(3)->get();
+   //add  when user views the service
+   $this-> handleView('App\Models\Service',$service->id);
 
-      return view('User.profile', compact('service'));
+      return view('User.profile', compact('service','services'));
+    }
+    /**
+     *create a new view  on a service when user visits for the first time.
+     *
+     * @param  \App\Models\services  $services
+     * void function
+     */
+
+    public function handleView($type,$id) {
+      //check if user has already viewed
+
+
+      $exist=Like::whereLikeableType($type)->whereLikeableId($id)->whereUserId(\Auth::id())->first();
+    if(is_null($exist)) {
+//add the view to likeables table;
+      $view= Like::create([
+        'user_id'=>\Auth::id(),
+        'likeable_id'=>$id,
+        'likeable_type'=>$type
+      ]);
+    }
     }
 }

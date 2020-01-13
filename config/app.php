@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+          Nagy\LaravelRating\LaravelRatingServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -225,6 +225,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        "LaravelRating" => \Nagy\LaravelRating\LaravelRatingFacade::class,
 
     ],
 

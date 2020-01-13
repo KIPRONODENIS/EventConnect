@@ -46,8 +46,14 @@ Dashboard
 {{$item->title}}
 @endslot
 
+@slot('views')
+{{$item->views->count()}}
+@endslot
 @slot('id')
 
+@slot('image')
+{{$item->image}}
+@endslot
 {{$item->id}}
 @endslot
 

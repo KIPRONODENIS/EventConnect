@@ -33,6 +33,14 @@
 {{$item->description}}
 @endslot
 
+@slot('image')
+{{$item->image}}
+@endslot
+
+@slot('views')
+{{$item->views->count()}}
+@endslot
+
 @endcomponent
 @endforeach
 

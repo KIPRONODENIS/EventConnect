@@ -20,4 +20,19 @@ class Service extends Model
     public function category() {
       return $this->hasMany(\App\ServiceCategory::class);
     }
+
+    /**
+  *Get  all views
+    */
+
+    public function views(){
+      return $this->morphToMany('App\User','likeable');
+    }
+    /**
+  *Check to see whether it has been viewed by authenticated user
+    */
+    public function getIsViewedAttribute() {
+      $view=$this->likes()->whereUserId(Auth::id())->first();
+      return(!is_null($like)? true:false);
+    }
 }

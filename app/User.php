@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+
 class User extends \TCG\Voyager\Models\User
 {
     use Notifiable;
@@ -51,4 +52,13 @@ class User extends \TCG\Voyager\Models\User
     public function events() {
     return $this->hasMany(\App\Event::class);
     }
+
+    /**
+     *
+     *Get all viewed services
+     *
+     */
+     public function viewedServices() {
+       return $this->morphedByMany('\App\Models\Service','likeable');
+     }
 }

@@ -66,7 +66,7 @@ Route::get('post-event', function(){
 })->name('post-event');
 
 //route to view each service
-Route::get('/view/{service}', 'ServicesController@view')->name('view');
+Route::get('/view/{service}', 'ServicesController@view')->name('view')->middleware('auth');
 //route to contact each user
 Route::get('/contact/{service}', 'UserController@contact')->name('contactuser');
 
