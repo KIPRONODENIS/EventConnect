@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
 @section('body')
-<div class="container">
+<div class="container py-10">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+            <div class="card  shadow">
+                <div class="card-header text-center bg-teal-800 text-white text-xl">{{ __('Create an Account') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-8">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
@@ -25,7 +25,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-8">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
@@ -39,7 +39,29 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row mb-8">
+                            <label for="type" class="col-md-4 col-form-label text-md-right">{{ "Register as:" }}</label>
+
+                            <div class="col-md-6 d-flex ">
+                              <div class="form-check mx-2">
+                                <label class="form-check-label">
+                                <input type="radio" name="user_type" value="Vendor" class="form-check-input" required>Vendor
+                                </label>
+                              </div>
+
+                                <div class="form-check">
+                                <label class="form-check-label">
+                                <input type="radio" name="user_type" value="Vendor" class="form-check-input" required>Client
+                                </label>
+                                </div>
+                                @error('user_type')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row mb-8">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
@@ -53,7 +75,9 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+
+
+                        <div class="form-group row mb-8">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">

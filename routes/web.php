@@ -49,15 +49,17 @@ Route::get('/invitation',function(){
 //Route to Dashboard
 Route::get('/dashboard', function(){
   return view('frontend.dashboard');
-})->name('frontend.dashboard');
+});
 //Route to show profile
 Route::get('/profile',function(){
 
   return view('profile');
 })->name('profile');
 
+// //Route to landing page
+// Route::get('/home', 'HomeController@index')->name('home');
 //Route to landing page
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home/{name?}', 'Frontend\DashboardController@main')->name('frontend.dashboard');
 //Test route
 Route::get('test','AccountController@update');
 //Route to post an event
