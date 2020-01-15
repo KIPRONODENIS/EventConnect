@@ -16,6 +16,7 @@ Route::group(['prefix' => 'admin'], function () {
 });
 //this is a home route
 Route::get('/', 'ServicesController@index')->name('home');
+
 //this is route that returns services page
 Route::get('/services/{category?}','ServicesController@showall')->name('services');
 //Route to return about page
@@ -74,3 +75,6 @@ Route::get('/contact/{service}', 'UserController@contact')->name('contactuser');
 
 //Authentication routes
 Auth::routes();
+
+
+Route::put('/user/', 'UserController@update');
