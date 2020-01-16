@@ -23,7 +23,7 @@
 
 <button type="submit" class="btn btn-primary m-3">Send Invitation</button>
 @unless(session('events')==true)
-<a  href="{{route('invite',[$id,'new'])}}" class="btn btn-primary m-3">Add event</a>
+<a  href="{{route('invite',[$id??1,'new'])}}" class="btn btn-primary m-3">Add event</a>
 
 @endunless
 </form>

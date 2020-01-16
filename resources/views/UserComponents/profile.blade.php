@@ -1,12 +1,42 @@
 <div class="card-row" id="profile">
 
-  <div class="w-1/3">Email:<span class="fa fa-check bg-green-500 p-2 success" id="email">up to date</span></div>
-  <div>
-<div class="card"  contenteditable="false">{{$data->email}}</div>
-  <div class="btn btn-primary edit" >Edit</div>
-<div class="btn btn-success save" name="email" >save</div>
+@component('SmallComponents.profile')
+ @slot('id')
+{{$data->id}}
+ @endslot
 
-</div>
+ @slot('email')
+{{$data->email}}
+ @endslot
+
+ @slot('label')
+{{"Email"}}
+ @endslot
+
+ @slot('column')
+
+{{"email"}}
+ @endslot
+@endcomponent
+
+@component('SmallComponents.profile')
+ @slot('id')
+{{$data->id}}
+ @endslot
+
+ @slot('email')
+{{$data->name}}
+ @endslot
+ @slot('label')
+{{"Name:"}}
+ @endslot
+
+ @slot('column')
+{{"name"}}
+ @endslot
+@endcomponent
+
+
   <script>
 $(document).ready(function(){
  var successdiv=$(".success").hide();
@@ -29,6 +59,7 @@ $(this).prev().attr('contenteditable',true);
 //in order to save the edited item
 $(".save").on('click', function(){
 var value=$(this).prev().prev().text();
+console.log($(this).prev().prev());
 var save=$(this);
 if(value.length>2){
   axios.put('/user', {

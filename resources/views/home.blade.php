@@ -7,16 +7,16 @@
             <div class="card">
                 <div class="card-header bg-white py-4 d-flex justify-between">
                   <div class="w-1/4 card bg-teal-500 shadow text-grey-darkest text-center p-3 hover:bg-white">
-                    <div class="amount text-xl text-teal-700 my-2">0</div>
+                    <div class="amount text-xl text-teal-700 my-2">{{$user_events ?? "0"}}</div>
                     <div class="amount  my-2">Events</div>
                   </div>
                   <div class="w-1/4 card bg-white shadow text-center p-3 hover:bg-teal-500">
-                    <div class="amount text-xl text-teal-700 my-2">0</div>
+                    <div class="amount text-xl text-teal-700 my-2">{{$user_invitations ?? "0"}}</div>
                     <h4 class="amount  my-2">Invitations</h4>
                   </div>
 
                   <div class="w-1/4 card bg-white shadow text-center p-3">
-                    <div class="amount text-xl text-teal-700 my-2">0</div>
+                    <div class="amount text-xl text-teal-700 my-2">{{$user_notifications ?? "0"}}</div>
                     <div class="amount  my-2">Notifications</div>
                   </div>
                 </div>
@@ -31,10 +31,11 @@
                 Welcome to your Dashboard
                 <div class="row d-flex justify-between m-2 py-5">
                   <ul class="nav nav-pills">
-  <li class="nav-item "><a href="{{route('frontend.dashboard','')}}"  class="nav-link active">Home</a></li>
-  <li class="nav-item shadow hover:bg-blue-700  rounded mx-2"><a href="{{route('frontend.dashboard','profile')}}" class="nav-link hover:text-white">My profile</a></li>
-  <li class="nav-item shadow hover:bg-blue-700  rounded mx-2"><a href="{{route('frontend.dashboard','events')}}"   class="nav-link hover:text-white">View Events</a></li>
-  <li class="nav-item shadow hover:bg-blue-700  rounded mx-2"><a href="{{route('frontend.dashboard','invitations')}}"   class="nav-link hover:text-white">View Invitation</a></li>
+  <li class="nav-item shadow hover:bg-blue-700  rounded mx-2"><a href="{{route('frontend.dashboard','')}}"  class="nav-link @if($name==''){{"active"}} @endif">Home</a></li>
+  <li class="nav-item shadow hover:bg-blue-700  rounded mx-2"><a href="{{route('frontend.dashboard','profile')}}" class="nav-link @if($name=='profile'){{"active"}} @endif hover:text-white">My profile</a></li>
+  <li class="nav-item shadow hover:bg-blue-700  rounded mx-2"><a href="{{route('frontend.dashboard','events')}}"   class="nav-link @if($name=='events'){{"active"}} @endif hover:text-white">View Events</a></li>
+  <li class="nav-item shadow hover:bg-blue-700  rounded mx-2"><a href="{{route('frontend.dashboard','invitations')}}"   class="nav-link @if($name=='invitations'){{"active"}} @endif hover:text-white">View Invitation</a></li>
+  <li class="nav-item shadow hover:bg-blue-700  rounded mx-2"><a href="{{route('frontend.dashboard','notifications')}}"   class="nav-link @if($name=='notifications'){{"active"}} @endif hover:text-white">Notifications</a></li>
 
 </ul>
 

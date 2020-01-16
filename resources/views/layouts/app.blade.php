@@ -34,6 +34,6 @@
 @endcomponent
     </div>
 
-
+@livewireAssets
 </body>
 </html>

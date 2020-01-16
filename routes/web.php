@@ -60,13 +60,13 @@ Route::get('/profile',function(){
 // //Route to landing page
 // Route::get('/home', 'HomeController@index')->name('home');
 //Route to landing page
-Route::get('/home/{name?}', 'Frontend\DashboardController@main')->name('frontend.dashboard');
+Route::get('/home/{name?}', 'Frontend\DashboardController@main')->name('frontend.dashboard')->middleware('auth');
 //Test route
 Route::get('test','AccountController@update');
 //Route to post an event
 Route::get('post-event', function(){
-  return "Hallo I will be posting evnt here";
-})->name('post-event');
+  return view('User.post-event');
+})->middleware('auth')->name('post-event');
 
 //route to view each service
 Route::get('/view/{service}', 'ServicesController@view')->name('view')->middleware('auth');

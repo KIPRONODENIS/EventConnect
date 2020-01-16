@@ -6,6 +6,8 @@ use App\Invitation;
 use Illuminate\Http\Request;
 use App\User;
 use App\Event;
+use Notification;
+use App\Notifications\InvitationSent;
 class InvitationController extends Controller
 {
     /**
@@ -76,7 +78,13 @@ if(empty($exist)) {
   ]);
   //use the relationship of event-invitation relatonship to save the invitation
  $saved=$event->invitations()->save($invitation);
+ //set the notification details
+  $details=['user'=>$saved->service->user->name,
+  'service'=>$saved->service->title,
+'event'=>$event->title];
 
+//send the actual notification
+Notification::send(\Auth::user(),new InvitationSent($details));
 //checks of its succesful and the set the session
   if($saved) {
     //find out the invitaed user

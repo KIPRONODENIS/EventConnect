@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use Illuminate\Http\Request;
-
+use Notification;
+use App\Notifications\EventCreatedNotification;
 class EventController extends Controller
 {
     /**
@@ -35,7 +36,15 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+      //get the url it will return
+   $url=str_replace(url('/'),'',url()->previous('previousUrl'));
 
+   if($url=='/post-event')
+   {
+     $view="User.post-event";
+   }else {
+     $view="invite";
+   }
       //do validation Here first
       $validated=$request->validate([
         'title'=>'required|min:3|max:40',
@@ -45,9 +54,13 @@ class EventController extends Controller
 
       ]);
 
+
       //create an event using logged un user
       $event=new \App\Event($validated);
      $event= \Auth::user()->events()->save($event);
+     //send the notofication to the database
+     Notification::send(\Auth::user(),new EventCreatedNotification(['title'=>$event->title]));
+
       session()->flash('success','Successfully created an event');
       //set the session events to false
       session()->put('events',false);
@@ -55,8 +68,11 @@ class EventController extends Controller
      $id=$request->service_id;
     //determine the new parameter
      $events=\Auth::user()->events;
-
-  return view('invite',compact('id','events'));
+     if($url=='/post-event')
+     {
+        return redirect()->back();
+     }
+  return view($view,compact('id','events'));
     }
 
     /**
