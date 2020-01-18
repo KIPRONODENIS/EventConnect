@@ -1,4 +1,7 @@
 <div class="events py-5">
+  @if(session()->has('deleted'))
+   <div class="alert alert-danger">{{session('deleted')}}</div>
+  @endif
 <table class="table table-responsive">
 <thead>
 <tr>
@@ -20,8 +23,15 @@
   <td>{{$value->event_date}}</td>
   <td>{{$value->location}}</td>
   <td>
-    <a href="{{$value->id}}"><span class="fa fa-edit"></span></a>
-    <a href="{{$value->id}}"><span class="fa fa-trash"></span></a>
+    <a href="/event/{{$value->id}}/edit"><span class="fa fa-edit"></span></a>
+    <a href="/event/{{$value->id}}"><span class="fa fa-eye"></span></a>
+    <a class="d-flex">
+      <form action="/event/{{$value->id}}" method="post">
+        @csrf
+        @method('delete')
+      <button class="bg-danger text-white p-2 rounded"><span class="fa fa-trash"></span></button>
+    </form>
+    </a>
   </td>
 </tr>
 @endforeach

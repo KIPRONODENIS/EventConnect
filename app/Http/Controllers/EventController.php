@@ -6,6 +6,8 @@ use App\Event;
 use Illuminate\Http\Request;
 use Notification;
 use App\Notifications\EventCreatedNotification;
+use RealRashid\SweetAlert\Facades\Alert;
+
 class EventController extends Controller
 {
     /**
@@ -25,7 +27,12 @@ class EventController extends Controller
      */
     public function create()
     {
-        //
+
+      $event=new Event();
+
+
+        return view('User.post-event',compact('event'));
+
     }
 
     /**
@@ -45,14 +52,19 @@ class EventController extends Controller
    }else {
      $view="invite";
    }
-      //do validation Here first
-      $validated=$request->validate([
+
+      $validated = $request->validate([
         'title'=>'required|min:3|max:40',
         'location'=>'required|min:2|max:20',
         'event_date'=>'required|date',
         'description'=>'required|min:10|max:150'
 
-      ]);
+ ]);
+
+ // if ($validated->fails()) {
+ //
+ //     return back()->with('errors', $validated->messages()->all()[0])->withInput();
+ // }
 
 
       //create an event using logged un user
@@ -61,7 +73,7 @@ class EventController extends Controller
      //send the notofication to the database
      Notification::send(\Auth::user(),new EventCreatedNotification(['title'=>$event->title]));
 
-      session()->flash('success','Successfully created an event');
+        Alert::success('Success', 'Event created');
       //set the session events to false
       session()->put('events',false);
       //get the id
@@ -83,7 +95,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //
+      return view('User.show-event',compact('event'));
     }
 
     /**
@@ -94,7 +106,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+       return view('User.edit-event')->with(['event'=>$event]);
     }
 
     /**
@@ -106,7 +118,17 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
+      $data=$request->validate([
+        'title'=>'required|min:3|max:40',
+        'location'=>'required|min:2|max:20',
+        'event_date'=>'required|date',
+        'description'=>'required|min:10|max:150'
+
+      ]);
+
+    $event->update($data);
+
+    return  redirect()->back()->with('success','updated Successfully');
     }
 
     /**
@@ -117,6 +139,13 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+
+      $event->delete();
+      // example:
+
+
+      toast(" {$event->title}  Deleted sucessfully", 'warning')->autoClose(5000);;
+
+      return redirect()->back();
     }
 }

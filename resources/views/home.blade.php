@@ -47,20 +47,20 @@
                 @include("UserComponents.".$name,$data)
                 @else
             @component('components.homecomponent')
-             @slot('message'){{"You have 3 notifications"}} @endslot
+             @slot('message'){{"You have " .Auth::user()->UnreadNotifications->count()." new notifications"}} @endslot
              @slot('route')
-                {{route('frontend.dashboard','')}}
+                {{route('frontend.dashboard','notifications')}}
              @endslot
-             @slot('routename'){{"View Home"}} @endslot
+             @slot('routename'){{"View Notifications"}} @endslot
             @slot('class'){{"btn btn-danger"}} @endslot
             @endcomponent
 
             @component('components.homecomponent')
              @slot('message'){{"Welcome to EventConnect.Get events services for event in three steps.Start by creating an event."}} @endslot
              @slot('route')
-                {{route('frontend.dashboard','')}}
+                {{route('post-event')}}
              @endslot
-             @slot('routename'){{"Create event"}} @endslot
+             @slot('routename'){{"Create Event"}} @endslot
               @slot('class'){{"btn btn-success"}} @endslot
             @endcomponent
 

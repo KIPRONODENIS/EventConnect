@@ -38,7 +38,6 @@ Route::get('/register',function(){
 //Route to invite
 Route::get('/invite/{id}/{new?}', 'InvitationController@create')->middleware('auth')->name('invite');
 //post route to invite
-Route::post('/event', 'EventController@store')->name('event.create');
 Route::post('/invite', 'InvitationController@store')->name('invite.create');
 //route to show invitation page
 Route::get('/invitation',function(){
@@ -64,9 +63,6 @@ Route::get('/home/{name?}', 'Frontend\DashboardController@main')->name('frontend
 //Test route
 Route::get('test','AccountController@update');
 //Route to post an event
-Route::get('post-event', function(){
-  return view('User.post-event');
-})->middleware('auth')->name('post-event');
 
 //route to view each service
 Route::get('/view/{service}', 'ServicesController@view')->name('view')->middleware('auth');
@@ -76,5 +72,10 @@ Route::get('/contact/{service}', 'UserController@contact')->name('contactuser');
 //Authentication routes
 Auth::routes();
 
-
+Route::post('/event', 'EventController@store')->name('event.create');
+Route::get('post-event', 'EventController@create')->middleware('auth')->name('post-event');
+Route::get('event/{event}','EventController@show');
+Route::get('event/{event}/edit','EventController@edit');
+Route::put('event/{event}','EventController@update')->name('event.update');
+Route::delete('event/{event}','EventController@destroy');
 Route::put('/user/', 'UserController@update');

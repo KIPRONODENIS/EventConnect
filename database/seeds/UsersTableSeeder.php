@@ -23,6 +23,7 @@ class UsersTableSeeder extends Seeder
                 'password'       => bcrypt('password'),
                 'remember_token' => Str::random(60),
                 'role_id'        => $role->id,
+                'user_type'=>'Vendor'
             ]);
         }
         factory(App\User::class,4)->create()->each(function($user){ $user->services()->save(factory(\App\Models\Service::class)

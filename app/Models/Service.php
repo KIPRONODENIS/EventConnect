@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Models;
-
+use willvincent\Rateable\Rateable;
 use Illuminate\Database\Eloquent\Model;
+
 
 class Service extends Model
 {
-    //
+    use Rateable;
     protected $guarded=[];
 
     public function user() {

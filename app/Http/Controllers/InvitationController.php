@@ -31,6 +31,7 @@ class InvitationController extends Controller
     {
       //get the id
     $id=request()->id;
+    session()->put('id',$id);
     //determine the new parameter
     $new=request('new');
   $events=\Auth::user()->events;
@@ -73,7 +74,7 @@ if(empty($exist)) {
   //Create a new invitation and pass in the seevice id and logged in user id
    $invitation=new Invitation([
       'invited_by'=>Auth()->id(),
-
+      'user_id'=>\App\Models\Service::find($request->service_id)->user->id,
       'service_id'=>$request->service_id
   ]);
   //use the relationship of event-invitation relatonship to save the invitation
@@ -89,10 +90,10 @@ Notification::send(\Auth::user(),new InvitationSent($details));
   if($saved) {
     //find out the invitaed user
 
-    session()->flash('success',"You have successfully invite {$saved->service->user->name} to provide  {$saved->service->title} in your {$event->title}");
+    alert('success',"You have successfully invite {$saved->service->user->name} to provide  {$saved->service->title} in your {$event->title}");
   }
 }else {
-session()->flash('success','Already invited');
+\Alert::info("Invitation already exist" );
 }
 
 

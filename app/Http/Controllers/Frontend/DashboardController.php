@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Invitation;
 
 class DashboardController extends Controller
 {
@@ -22,7 +23,7 @@ class DashboardController extends Controller
    $default=empty($name)?true:false;
    //data to be passed
    $data=$this->getdata($name);
-   //$name
+dd($data[1]->event);
 
 return view('home')->with(['default'=>$default,'data'=>$data,'name'=>$name,
 'user_events'=>$user_events,
@@ -49,10 +50,10 @@ return view('home')->with(['default'=>$default,'data'=>$data,'name'=>$name,
 
 
       case "invitations":
-       return \Auth::user()->invitations ?? [];
+    return    Invitation::mysentinvitations()->with('service.user')->get() ?? [];
       break;
       case "notifications":
-       return  ["hhsshsh"];
+     return \Auth::user()->notifications ?? [];
       break;
 
 

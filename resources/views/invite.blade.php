@@ -6,7 +6,7 @@
 <h1 class="text-teal-700 uppercase m-3">Select the event</h1>
 <form method="post" action="{{route('invite.create')}}">
   {{csrf_field()}}
-<input type="hidden" name="service_id" value="{{$id}}">
+<input type="hidden" name="service_id" value="{{session('id')}}">
 <select name="event" class="form-control m-3 pr-3 lineHeight-40">
  @empty($events)
   <option>Non selected</option>
@@ -38,7 +38,7 @@
   <div class="alert alert-danger">{{$error}}</div>
   @endforeach
   @endif
-@includeWhen(session('events')==true,'components.invite-form')
+@includeWhen(session('events')==true,'components.invite-form',['route'=>route('event.create'),'title'=>"Create Event",'method'=>'','event'=>new \App\Event()])
 </div>
 </div>
 

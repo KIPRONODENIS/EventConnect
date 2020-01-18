@@ -35,5 +35,7 @@
     </div>
 
 @livewireAssets
+@include('sweetalert::alert')
+
 </body>
 </html>
