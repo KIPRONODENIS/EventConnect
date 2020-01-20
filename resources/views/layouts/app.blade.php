@@ -18,6 +18,7 @@
 <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.css">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">

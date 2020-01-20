@@ -11,7 +11,7 @@ $factory->define(Invitation::class, function (Faker $faker) {
         'service_id'=>function() {
           return factory(\App\Models\Service::class)->create()->id;
         },
-        'user_id'=>18,
+      
         'event_id'=>factory(\App\Event::class)->create()->id
     ];
 });

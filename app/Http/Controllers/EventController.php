@@ -71,7 +71,7 @@ class EventController extends Controller
       $event=new \App\Event($validated);
      $event= \Auth::user()->events()->save($event);
      //send the notofication to the database
-     Notification::send(\Auth::user(),new EventCreatedNotification(['title'=>$event->title]));
+     Notification::send(\Auth::user(),new EventCreatedNotification(['title'=>'Event Created','msg'=>"You  successfully created {$event->title}"]));
 
         Alert::success('Success', 'Event created');
       //set the session events to false

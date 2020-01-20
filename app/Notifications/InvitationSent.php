@@ -55,9 +55,8 @@ class InvitationSent extends Notification
     public function toDatabase($notifiable)
     {
         return [
-          'user'=>$this->details['user'],
-          'service'=>$this->details['service'],
-          'event'=>$this->details['event']
+          'msg'=>$this->details['msg'],
+          'title'=>$this->details['title']
         ];
     }
 }

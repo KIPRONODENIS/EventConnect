@@ -23,7 +23,7 @@ class DashboardController extends Controller
    $default=empty($name)?true:false;
    //data to be passed
    $data=$this->getdata($name);
-dd($data[1]->event);
+
 
 return view('home')->with(['default'=>$default,'data'=>$data,'name'=>$name,
 'user_events'=>$user_events,

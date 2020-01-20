@@ -32,8 +32,8 @@ class EventCreatedNotification extends Notification
      */
    public function toDatabase($notifiable) {
      return [
-    'title'=>$this->details['title']
-
+    'title'=>$this->details['title'],
+     'msg'=>$this->details['msg']
      ];
    }
     /**

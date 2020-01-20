@@ -17,7 +17,7 @@ class CreateInvitationsTable extends Migration
             $table->bigIncrements('id');
             $table->string('invited_by');
             $table->unsignedBigInteger('event_id');
-            $table->unsignedBigInteger('user_id');
+            $table->string('status')->default('pending');
             $table->string('service_id');
             $table->timestamps();
         });

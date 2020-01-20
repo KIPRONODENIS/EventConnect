@@ -74,15 +74,16 @@ if(empty($exist)) {
   //Create a new invitation and pass in the seevice id and logged in user id
    $invitation=new Invitation([
       'invited_by'=>Auth()->id(),
-      'user_id'=>\App\Models\Service::find($request->service_id)->user->id,
+
       'service_id'=>$request->service_id
   ]);
   //use the relationship of event-invitation relatonship to save the invitation
  $saved=$event->invitations()->save($invitation);
  //set the notification details
-  $details=['user'=>$saved->service->user->name,
-  'service'=>$saved->service->title,
-'event'=>$event->title];
+ $msg="You have successfully invite {$saved->service->user->name} to provide  {$saved->service->title} in your {$event->title}";
+//details to be passed to the notification
+  $details=['msg'=>$msg,'title'=>'Invitation Sent'];
+
 
 //send the actual notification
 Notification::send(\Auth::user(),new InvitationSent($details));
@@ -90,7 +91,7 @@ Notification::send(\Auth::user(),new InvitationSent($details));
   if($saved) {
     //find out the invitaed user
 
-    alert('success',"You have successfully invite {$saved->service->user->name} to provide  {$saved->service->title} in your {$event->title}");
+    alert('success',$msg);
   }
 }else {
 \Alert::info("Invitation already exist" );
