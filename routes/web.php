@@ -10,10 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Admin routes for voyager
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
+
 //this is a home route
 Route::get('/', 'ServicesController@index')->name('home');
 
