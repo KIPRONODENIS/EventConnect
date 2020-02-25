@@ -24,7 +24,7 @@
 
 </head>
 <body>
-    <div id="app">
+    <div>
   @component('components.nav')
 
   @endcomponent

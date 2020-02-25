@@ -32,62 +32,32 @@ $(document).ready(function(){
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Service Name</th>
-						<th>Invitations</th>
+                        <th>Service Image</th>
+						<th>Service Name</th>
 						<th>Date Created</th>
-            <th>Status</th>
+            <th>Invitations</th>
 
 						<th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><a href="#"><img src="/examples/images/avatar/1.jpg" class="avatar" alt="Avatar"> Michael Holz</a></td>
-						<td>London</td>
-                        <td>Jun 15, 2017</td>
-						<td><span class="status text-success">&bull;</span> Active</td>
+		@foreach($services as $service)
+		<tr>
+				  <td>{{(int)$loop->index+1}}</td>
+				<td><a href="#"><img src="{{asset('storage/'.$service->image)}}" class="shadow border border-gray-100" alt="Avatar" height="200" width="200"> </a></td>
+<td>{{$service->title}}</td>
+				<td>{{$service->created_at->diffForHumans()}}</td>
+<td><span class="status text-success text-md">{{$service->invitations->count()}}</td>
 
-						<td><a href="#" class="view" title="View Details" data-toggle="tooltip"><i class="material-icons">&#xE5C8;</i></a></td>
-                    </tr>
-					<tr>
-                        <td>2</td>
-                        <td><a href="#"><img src="/examples/images/avatar/2.jpg" class="avatar" alt="Avatar"> Paula Wilson</a></td>
-                        <td>Madrid</td>
-						<td>Jun 21, 2017</td>
-					  <td><span class="status text-danger">&bull;</span> InActive</td>
+<td><a href="#" class="view m-2" title="View Details" data-toggle="tooltip"><i class="material-icons">&#xE5C8;</i></a>
+<a href="#" class="view text-green-500 m-2" title="View Details" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
+<a href="#" class="view border-red-700 m-2 hover:text-white" title="View Details" data-toggle="tooltip"><i class="text-danger fa fa-trash"></i></a></td>
+		</tr>
+		@endforeach
 
-						<td><a href="#" class="view" title="View Details" data-toggle="tooltip"><i class="material-icons">&#xE5C8;</i></a></td>
-                    </tr>
-					<tr>
-                        <td>3</td>
-                        <td><a href="#"><img src="/examples/images/avatar/3.jpg" class="avatar" alt="Avatar"> Antonio Moreno</a></td>
-						<td>Berlin</td>
-                        <td>Jul 04, 2017</td>
-                        <td><span class="status text-danger">&bull;</span> InActive</td>
-
-						<td><a href="#" class="view" title="View Details" data-toggle="tooltip"><i class="material-icons">&#xE5C8;</i></a></td>
-                    </tr>
-					<tr>
-                        <td>4</td>
-                        <td><a href="#"><img src="/examples/images/avatar/4.jpg" class="avatar" alt="Avatar"> Mary Saveley</a></td>
-						<td>New York</td>
-                        <td>Jul 16, 2017</td>
-					  <td><span class="status text-danger">&bull;</span> InActive</td>
-						<td><a href="#" class="view" title="View Details" data-toggle="tooltip"><i class="material-icons">&#xE5C8;</i></a></td>
-                    </tr>
-					<tr>
-                        <td>5</td>
-                        <td><a href="#"><img src="/examples/images/avatar/5.jpg" class="avatar" alt="Avatar"> Martin Sommer</a></td>
-						<td>Paris</td>
-                        <td>Aug 04, 2017</td>
-					  <td><span class="status text-danger">&bull;</span> InActive</td>
-
-						<td><a href="#" class="view" title="View Details" data-toggle="tooltip"><i class="material-icons">&#xE5C8;</i></a></td>
-                    </tr>
                 </tbody>
             </table>
-			<div class="clearfix">
+			<!-- <div class="clearfix">
                 <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
                 <ul class="pagination">
                     <li class="page-item disabled"><a href="#">Previous</a></li>
@@ -100,7 +70,7 @@ $(document).ready(function(){
 					<li class="page-item"><a href="#" class="page-link">7</a></li>
                     <li class="page-item"><a href="#" class="page-link">Next</a></li>
                 </ul>
-            </div>
+            </div> -->
         </div>
     </div>
 @endsection

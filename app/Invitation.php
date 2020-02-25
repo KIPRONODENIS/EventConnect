@@ -10,7 +10,11 @@ class Invitation extends Model
     protected $guarded=[];
 
     public function service() {
-      return $this->belongsTo(\App\Models\Service::class);
+      return $this->belongsTo(\App\Models\Service::class,'service_id');
+    }
+    //who innvited
+    public function inviter() {
+      return $this->belongsTo(\App\User::class,'invited_by');
     }
 
     //
