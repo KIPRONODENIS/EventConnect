@@ -45,6 +45,9 @@ Route::get('/invitation',function(){
 
 //Route to Dashboard
 Route::get('/dashboard', function(){
+ if(auth()->user()->hasRole('Vendor')) {
+   return redirect('/seller');
+ }
   return view('frontend.dashboard');
 });
 //Route to show profile
@@ -65,7 +68,11 @@ Route::get('test','AccountController@update');
 Route::get('/view/{service}', 'ServicesController@view')->name('view')->middleware('auth');
 //route to contact each user
 Route::get('/contact/{service}', 'UserController@contact')->name('contactuser');
-
+Route::get('/seller','VendorController@index')->middleware('auth');
+//route to see invitation
+Route::get('/seller/invitation/{invitation}','VendorController@invitation');
+//route to see order
+Route::get('/seller/services/','VendorController@services');
 //Authentication routes
 Auth::routes();
 
@@ -75,4 +82,4 @@ Route::get('event/{event}','EventController@show');
 Route::get('event/{event}/edit','EventController@edit');
 Route::put('event/{event}','EventController@update')->name('event.update');
 Route::delete('event/{event}','EventController@destroy');
-Route::put('/user/', 'UserController@update');
+Route::put('/user', 'UserController@update');

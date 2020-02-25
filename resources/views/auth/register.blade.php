@@ -51,7 +51,7 @@
 
                                 <div class="form-check">
                                 <label class="form-check-label">
-                                <input type="radio" name="user_type" value="Vendor" class="form-check-input" required>Client
+                                <input type="radio" name="user_type" value="Client" class="form-check-input" required>Client
                                 </label>
                                 </div>
                                 @error('user_type')

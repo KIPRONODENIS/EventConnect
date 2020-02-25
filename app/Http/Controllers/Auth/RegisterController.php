@@ -66,11 +66,22 @@ class RegisterController extends Controller
     {
 
 
-        return User::create([
+  $user= User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'user_type'=>$data['user_type'],
             'password' => Hash::make($data['password']),
         ]);
+
+        if($data['user_type']=='Vendor') {
+    $user->assignRole("Vendor");
+        }
+
+  return $user;
+    }
+
+
+    public function redirectTo() {
+  return   auth()->user()->hasRole('Vendor') ?'/seller' :'/home';
     }
 }

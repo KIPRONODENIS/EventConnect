@@ -17,6 +17,10 @@ class DashboardController extends Controller
    */
   public function main($name='')
   {
+    if(auth()->user()->hasRole('Vendor')) {
+      return redirect('/seller');
+    }
+    
   $user_events=\Auth::user()->events->count();
    $user_invitations=\Auth::user()->invitations->count();
     //give us the data
