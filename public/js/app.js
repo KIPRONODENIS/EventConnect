@@ -1854,14 +1854,68 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    id: {
+      type: Number,
+      required: true
+    }
+  },
   mounted: function mounted() {
     console.log('Component mounted.');
   },
   data: function data() {
     return {
-      message: "Hallo world"
+      status: 'Select',
+      invitation: this.id
     };
+  },
+  methods: {
+    send: function send() {
+      axios.post("/seller/invitation", {
+        'status': this.status,
+        'id': this.id
+      }).then(function (response) {
+        console.log(response.data);
+      }).then(function (error) {});
+    },
+    changed: function changed() {
+      alert("i got ot");
+    }
   }
 });
 
@@ -37259,27 +37313,119 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "container" }, [
+    _c(
+      "button",
+      {
+        staticClass: "btn btn-primary",
+        attrs: {
+          type: "button",
+          "data-toggle": "modal",
+          "data-target": "#myModal"
+        }
+      },
+      [_vm._v("\n    Update Status\n  ")]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "modal", attrs: { id: "myModal" } }, [
+      _c("div", { staticClass: "modal-dialog" }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [
+            _c("div", { staticClass: "container" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-8 col-md-4" }, [
+                  _c("h6", [_vm._v("Large")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.status,
+                          expression: "status"
+                        }
+                      ],
+                      staticClass:
+                        "custom-select custom-select-lg form-control",
+                      attrs: { id: "gender2" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.status = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { selected: "" } }, [
+                        _vm._v("Choose...")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v("accepted")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v("Rejected")]),
+                      _vm._v(" "),
+                      _c("option", [_vm._v("pending")])
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-footer flex justify-around" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                attrs: { type: "button" },
+                on: { click: _vm.send }
+              },
+              [_vm._v("Save")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger",
+                attrs: { type: "button", "data-dismiss": "modal" }
+              },
+              [_vm._v("Close")]
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v("\n                  thius is component\n                ")
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h4", { staticClass: "modal-title" }, [_vm._v("Update Status")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("×")]
+      )
     ])
   }
 ]
@@ -49515,7 +49661,7 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  */
 
 var app = new Vue({
-  el: document.querySelector("#new")
+  el: "#app"
 });
 
 /***/ }),

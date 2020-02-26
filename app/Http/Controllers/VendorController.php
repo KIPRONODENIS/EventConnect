@@ -30,4 +30,12 @@ class VendorController extends Controller
         return view('seller.services-view',compact('services'));
 
       }
+
+      public function update(Request $request) {
+      $id=$request->id;
+      $status=Invitation::find($id);
+      $status->status=$request->status;
+      $status->save();
+      return response()->json($status);
+      }
 }

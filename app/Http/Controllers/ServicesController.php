@@ -6,6 +6,7 @@ use App\Models\Service as services;
 use Illuminate\Http\Request;
 use App\Like ;
 use App\ServiceCategory;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ServicesController extends Controller
 {
@@ -44,7 +45,9 @@ class ServicesController extends Controller
      */
     public function create()
     {
-        //
+      $categories=ServiceCategory::all();
+
+     return view('seller.service.create',compact('categories'));
     }
 
     /**
@@ -55,7 +58,28 @@ class ServicesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $validated=  $request->validate([
+          'title'=>'required',
+          'service_category_id'=>'required',
+          'town'=>'required',
+          'image'=>'required|file|image',
+          'description'=>'required|min:10'
+        ]);
+
+    $service=new services([
+        'title'=>$request->title,
+        'service_category_id'=>$request->service_category_id,
+        'town'=>$request->town,
+        'description'=>$request->description,
+        'image'=>$request->file('image')->store('images',['disk'=>'public'])
+    ]);
+//save the service
+
+  $saved=auth()->user()->services()->save($service);
+
+  Alert::success('Success', 'Service successfully Created');
+
+  return redirect('/seller/services');
     }
 
     /**
@@ -64,9 +88,9 @@ class ServicesController extends Controller
      * @param  \App\Models\services  $services
      * @return \Illuminate\Http\Response
      */
-    public function show(services $services)
+    public function show(services $service)
     {
-        //
+  //  return view('seller.service.index');
     }
 
     /**
@@ -75,9 +99,10 @@ class ServicesController extends Controller
      * @param  \App\Models\services  $services
      * @return \Illuminate\Http\Response
      */
-    public function edit(services $services)
+    public function edit(services $service)
     {
-        //
+        $categories=ServiceCategory::all();
+        return view('seller.service.edit',compact('service','categories'));
     }
 
     /**
@@ -87,9 +112,17 @@ class ServicesController extends Controller
      * @param  \App\Models\services  $services
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, services $services)
+    public function update(Request $request, services $service)
     {
-        //
+
+      $updated=$service->update($request->except(['_token','_method','image']));
+      if($request->hasFile('image')) {
+
+        $service->update(['image'=>$request->file('image')->store('images',['disk'=>'public'])]);
+      }
+
+    session()->flash('success','Updated successfully');
+    return redirect('/seller/services');
     }
 
     /**
@@ -98,9 +131,12 @@ class ServicesController extends Controller
      * @param  \App\Models\services  $services
      * @return \Illuminate\Http\Response
      */
-    public function destroy(services $services)
+    public function destroy(services $service)
     {
-        //
+      $service->delete();
+        Alert::success('Success', 'Service Deleted Successfully');
+
+        return redirect('/seller/services');
     }
     /**
      * View  the specified service from storage.

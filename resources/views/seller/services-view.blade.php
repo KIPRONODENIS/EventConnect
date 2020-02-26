@@ -22,7 +22,7 @@ $(document).ready(function(){
 						<h2> Your  <b>Services</b></h2>
 					</div>
 					<div class="col-sm-8">
-						<a href="#" class="btn btn-primary"><i class="material-icons">&#xE863;</i> <span>Add New</span></a>
+						<a href="{{route('seller.create_service')}}" class="btn btn-primary"><i class="material-icons">&#xE863;</i> <span>Add New</span></a>
 
 					</div>
                 </div>
@@ -49,9 +49,9 @@ $(document).ready(function(){
 				<td>{{$service->created_at->diffForHumans()}}</td>
 <td><span class="status text-success text-md">{{$service->invitations->count()}}</td>
 
-<td><a href="#" class="view m-2" title="View Details" data-toggle="tooltip"><i class="material-icons">&#xE5C8;</i></a>
-<a href="#" class="view text-green-500 m-2" title="View Details" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
-<a href="#" class="view border-red-700 m-2 hover:text-white" title="View Details" data-toggle="tooltip"><i class="text-danger fa fa-trash"></i></a></td>
+ <td>
+<a href="{{route('seller.edit_service',$service->id)}}" class="view text-blue-500 m-2" title="edit details" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
+<a href="{{route('seller.delete_service',$service->id)}}" class="view border-red-700 m-2 hover:text-white" title="Delete Details" data-toggle="tooltip"><i class="text-danger fa fa-trash"></i></a></td>
 		</tr>
 		@endforeach
 

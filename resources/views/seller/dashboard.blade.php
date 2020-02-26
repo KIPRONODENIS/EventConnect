@@ -14,7 +14,8 @@ $(document).ready(function(){
 </script>
 @endsection
 @section('body')
-    <div class="container">
+    <div class="container" >
+
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">
@@ -22,7 +23,7 @@ $(document).ready(function(){
 						<h2> Recieved Invitations <b>Details</b></h2>
 					</div>
 					<div class="col-sm-8">
-						<a href="#" class="btn btn-primary"><i class="material-icons">&#xE863;</i> <span>Refresh List</span></a>
+						<a href="{{route('seller.services')}}" class="btn btn-primary"><i class="material-icons">&#xE863;</i> <span>My Services</span></a>
 
 					</div>
                 </div>
@@ -77,7 +78,7 @@ $(document).ready(function(){
                     <tr>
                         <th>#</th>
                         <th>Customer</th>
-						<th>Location</th>
+
 						<th>Invited Date</th>
                         <th>Status</th>
 						<th>Invited BY</th>
@@ -90,7 +91,7 @@ $(document).ready(function(){
                     <tr>
                         <td>{{(int)$loop->index+1}}</td>
                         <td class="d-flex "><a href="#"><img src="{{asset('/storage/'.$invitation->service->image)}}"  alt="Avatar" height="100" width="100"> {{$invitation->service->title}}</a></td>
-						<td>London</td>
+
                         <td>{{$invitation->created_at->diffForHumans()}}</td>
 						<td><span class="status
              @if($invitation->status=='pending')

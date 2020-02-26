@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('vue',function() {
+  return view('welcome2');
+});
 
 //this is a home route
 Route::get('/', 'ServicesController@index')->name('home');
@@ -72,7 +75,21 @@ Route::get('/seller','VendorController@index')->middleware('auth');
 //route to see invitation
 Route::get('/seller/invitation/{invitation}','VendorController@invitation');
 //route to see order
-Route::get('/seller/services/','VendorController@services');
+Route::get('/seller/services/','VendorController@services')->name('seller.services');
+//update Status
+Route::post('/seller/invitation','VendorController@update');
+
+//Routes to create,edit and delete
+Route::get('/seller/services/new','ServicesController@create')->name('seller.create_service');
+//Route::get('/seller/{service}/show','ServicesController@show')->name('seller.show_service');
+Route::get('/seller/{service}/edit','ServicesController@edit')->name('seller.edit_service');
+Route::get('/seller/{service}/delete','ServicesController@destroy')->name('seller.delete_service');
+Route::post('/seller/services/new','ServicesController@store')->name('seller.service.create');
+Route::put('/seller/{service}/update','ServicesController@update')->name('seller.service.update');
+
+
+//Routes for the admin user
+Route::get('/admin','AdminController@index')->name('admin.index');
 //Authentication routes
 Auth::routes();
 
