@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use App\User;
 class RolePermissionTableSeeder extends Seeder
 {
     /**
@@ -18,5 +19,9 @@ class RolePermissionTableSeeder extends Seeder
          // this can be done as separate statements
         $role = Role::create(['name' => 'Vendor']);
         $role->givePermissionTo('add services');
+
+          $role1 = Role::create(['name' => 'Admin']);
+          $role1->givePermissionTo(Permission::all());
+        User::first()->assignRole('Admin');
     }
 }

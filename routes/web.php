@@ -90,6 +90,11 @@ Route::put('/seller/{service}/update','ServicesController@update')->name('seller
 
 //Routes for the admin user
 Route::get('/admin','AdminController@index')->name('admin.index');
+Route::get('/admin/payments','AdminController@payments')->name('admin.payments');
+Route::get('/admin/services','AdminController@services')->name('admin.services');
+Route::get('/admin/events','AdminController@events')->name('admin.events');
+Route::get('/admin/reports','AdminController@reports')->name('admin.reports');
+Route::get('/admin/invitations','AdminController@invitations')->name('admin.invitations');
 //Authentication routes
 Auth::routes();
 

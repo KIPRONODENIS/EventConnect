@@ -17,7 +17,10 @@ class Invitation extends Model
       return $this->belongsTo(\App\User::class,'invited_by');
     }
 
-    //
+  //relationship of event and invitations
+  public function event() {
+    return $this->belongsTo(\App\Event::class);
+  }
     public function getEventAttribute() {
       return \App\Event::where('id',$this->event_id)->get();
     }
@@ -36,7 +39,7 @@ class Invitation extends Model
 //         return $user;
 //     }
 
-    public function user()
+    public function provider()
     {
     return $this->hasOne('App\User', 'id', 'invited_by');
     }
