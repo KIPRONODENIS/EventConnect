@@ -38,7 +38,7 @@
 
 <div class="col">
   <label class="text-gray-600"> Price</label>
-<input type="text" name="price"  class="form-control"value="{{$service->price}}">
+<input type="text" name="price"  class="form-control" value="{{$service->price}}">
 </div>
 </div>
 

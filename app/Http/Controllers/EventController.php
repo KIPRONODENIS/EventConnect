@@ -98,6 +98,11 @@ class EventController extends Controller
       return view('User.show-event',compact('event'));
     }
 
+    public function adminShow(Event $event)
+    {
+      return view('admin.events.index',compact('event'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -107,6 +112,10 @@ class EventController extends Controller
     public function edit(Event $event)
     {
        return view('User.edit-event')->with(['event'=>$event]);
+    }
+    public function adminEdit(Event $event)
+    {
+       return view('admin.events.edit')->with(['event'=>$event]);
     }
 
     /**
@@ -122,7 +131,7 @@ class EventController extends Controller
         'title'=>'required|min:3|max:40',
         'location'=>'required|min:2|max:20',
         'event_date'=>'required|date',
-        'description'=>'required|min:10|max:150'
+        'description'=>'required|min:10|max:300'
 
       ]);
 

@@ -113,6 +113,12 @@ Route::get('/admin/services/{service}/view','ServicesController@adminView')->nam
 Route::put('/admin/services/{service}/update','ServicesController@adminUpdate')->name('admin.service.update');
 Route::get('/admin/services/{service}/remove','ServicesController@destroyByAdmin')->name('admin.service.delete');
 
+//Admin Event Routes
+Route::get('/admin/events/{event}','EventController@adminShow')->name('admin.events.index');
+Route::get('/admin/events/{event}/edit','EventController@adminEdit')->name('admin.events.edit');
+Route::get('/admin/events/{event}/remove','EventController@destroy')->name('admin.events.delete');
+Route::put('/admin/events/{event}/update','EventController@update')->name('admin.events.update');
+
 //Authentication routes
 Auth::routes();
 

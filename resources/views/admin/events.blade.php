@@ -34,9 +34,9 @@
                       <td>{{$event->event_date}}</td>
                       <td>{{$event->description}}</td>
                       <td class="d-flex justify-content-between">
-                        <a class="btn btn-success" href="#" >view</a>
-                        <a class="btn btn-primary" href="#" >Edit</a>
-                        <a class="btn btn-danger" href="#" >Delete</a>
+                        <a class="btn btn-success" href="{{route('admin.events.index',$event->id)}}" >view</a>
+                        <a class="btn btn-primary" href="{{route('admin.events.edit',$event->id)}}" >Edit</a>
+                        <a class="btn btn-danger" href="{{route('admin.events.delete',$event->id)}}" >Delete</a>
                       </td>
                     </tr>
   @endforeach

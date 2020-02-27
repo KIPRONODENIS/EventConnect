@@ -108,6 +108,7 @@ $categories=ServiceCategory::all();
         'title'=>$request->title,
         'service_category_id'=>$request->service_category_id,
         'town'=>$request->town,
+        'price'=>$request->price,
         'description'=>$request->description
 
     ]);

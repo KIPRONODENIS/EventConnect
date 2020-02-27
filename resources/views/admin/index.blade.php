@@ -15,7 +15,7 @@
                                     <div class="card-body">Revenue</div>
                                     <h1 class="h4 mx-3">Kshs. {{$revenue}}</h1>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <a class="small text-white stretched-link" href="{{route('admin.payments')}}">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -26,7 +26,7 @@
                                     <div class="card-body">Users</div>
                                     <h1 class="h4 mx-3">{{$users}}</h1>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <a class="small text-white stretched-link" href="#users">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -36,7 +36,7 @@
                                     <div class="card-body">Invitations</div>
                                     <h1 class="h4 mx-3">{{$invitations}}</h1>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <a class="small text-white stretched-link" href="{{route('admin.invitations')}}">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -46,7 +46,7 @@
                                     <div class="card-body">Events</div>
                                     <h1 class="h4 mx-3">{{$events}}</h1>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <a class="small text-white stretched-link" href="{{route('admin.events')}}">View Details</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card mb-4">
+                        <div class="card mb-4" id="users">
                             <div class="card-header"><i class="fas fa-users"></i> All Users</div>
                             <div class="card-body">
                                 <div class="table-responsive">
