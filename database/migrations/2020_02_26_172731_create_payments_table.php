@@ -18,6 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->string('code');
             $table->unsignedBigInteger('user_id');
             $table->integer('amount');
+            $table->string('description')->default('Payment for April subscription');
             $table->timestamps();
         });
     }

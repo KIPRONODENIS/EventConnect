@@ -32,4 +32,43 @@ public function update(Request $request) {
   return response()->json(['message'=>$message]);
 }
 
+
+public function view(User $user) {
+return view('admin.user.index',compact('user'));
+}
+
+public function edit(User $user) {
+return view('admin.user.edit',compact('user'));
+}
+
+public function updateByAdmin(Request $request, User $user) {
+
+$request->validate([
+  'name'=>'required',
+  'email'=>'required',
+  'role'=>'required'
+
+]);
+
+$user->name=$request->name;
+$user->email=$request->email;
+$user->assignRole($request->role);
+
+if($request->hasFile('image')) {
+  $user->image=$request->image->store('users',['disk'=>'public']);
+}
+
+$user->save();
+session()->flash('success',"Updated Successfully");
+
+return redirect()->route('admin.user.view',$user->id);
+}
+
+public function destroy(User $user) {
+$user->delete();
+session()->flash('success',"successfully deleted");
+
+return redirect('/admin');
+}
+
 }

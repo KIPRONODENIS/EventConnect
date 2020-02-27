@@ -42,9 +42,9 @@
                       <td>{{$service->price}}</td>
                       <td>{{$service->town}}</td>
                       <td class="d-flex justify-content-between">
-                        <a class="btn btn-success" href="#" >view</a>
-                        <a class="btn btn-primary" href="#" >Edit</a>
-                        <a class="btn btn-danger" href="#" >Delete</a>
+
+                        <a class="btn btn-primary" href="{{route('admin.service.edit',$service->id)}}" >Edit</a>
+                        <a class="btn btn-danger" href="{{route('admin.service.delete',$service->id)}}" >Delete</a>
                       </td>
                   </tr>
   @endforeach

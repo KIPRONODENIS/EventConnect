@@ -38,9 +38,48 @@
                       <td>{{$invitation->status}}</td>
                       <td>{{$invitation->created_at}}</td>
                       <td class="d-flex justify-content-between">
-                        <a class="btn btn-success" href="#" >view</a>
-                        <a class="btn btn-primary" href="#" >Edit</a>
-                        <a class="btn btn-danger" href="#" >Delete</a>
+                        <a class="btn btn-success m-2" href="#" data-toggle="modal" data-target="#myModal{{$invitation->id}}">Update </a>
+                        <!-- Button to Open the Modal -->
+<!-- <button type="button" class="btn btn-primary" >
+  Open modal
+</button> -->
+
+<!-- The Modal -->
+<div class="modal" id="myModal{{$invitation->id}}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Update Status</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+  <form method="post" action="{{route('admin.invitation.update',$invitation->id)}}">
+    @csrf
+    @method('put')
+      <div class="modal-body">
+
+    <select name="status" class="custom-select">
+      <option selected>Pending</option>
+      <option >Accepted</option>
+      <option >Rejected</option>
+
+    </select>
+
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" >Save</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+  </form>
+
+
+    </div>
+  </div>
+</div>
+
+                        <a class="btn btn-danger m-2" href="{{route('admin.invitation.delete',$invitation->id)}}" >Delete</a>
                       </td>
                   </tr>
                     @endforeach

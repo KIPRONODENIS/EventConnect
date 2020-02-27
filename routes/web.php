@@ -95,6 +95,24 @@ Route::get('/admin/services','AdminController@services')->name('admin.services')
 Route::get('/admin/events','AdminController@events')->name('admin.events');
 Route::get('/admin/reports','AdminController@reports')->name('admin.reports');
 Route::get('/admin/invitations','AdminController@invitations')->name('admin.invitations');
+
+//ADMIN CRUD ROUTES
+Route::get('/admin/{user}/view','UserController@view')->name('admin.user.view');
+Route::get('/admin/{user}/edit','UserController@edit')->name('admin.user.edit');
+Route::get('/admin/{user}/remove','UserController@destroy')->name('admin.user.delete');
+Route::put('/admin/{user}/update','UserController@updateByAdmin')->name('admin.user.update');
+
+//Admin Payment routes
+Route::get('/admin/payment/{payment}/remove','PaymentController@destroy')->name('admin.payments.delete');
+
+//Admion Invitation Routes
+Route::put('/admin/invitation/{invitation}/update','InvitationController@updateStatus')->name('admin.invitation.update');
+Route::get('/admin/invitation/{invitation}/remove','InvitationController@destroy')->name('admin.invitation.delete');
+//ROUTE TO ADMIN SERVICE MANAGEMENT
+Route::get('/admin/services/{service}/view','ServicesController@adminView')->name('admin.service.edit');
+Route::put('/admin/services/{service}/update','ServicesController@adminUpdate')->name('admin.service.update');
+Route::get('/admin/services/{service}/remove','ServicesController@destroyByAdmin')->name('admin.service.delete');
+
 //Authentication routes
 Auth::routes();
 

@@ -11,6 +11,8 @@
                         <th>Code</th>
                         <th>Payed By</th>
                         <th>Amount</th>
+                          <th>Description</th>
+                        <th>Date</th>
                         <th>Action</th>
 
                     </tr>
@@ -21,6 +23,9 @@
                       <th>Code</th>
                       <th>Payed By</th>
                       <th>Amount</th>
+                       <th>Description</th>
+                      <th>Date</th>
+
                       <th>Action</th>
 
                     </tr>
@@ -30,12 +35,14 @@
                     <tr>
                       <td>{{$payment->id}}</td>
                       <td>{{$payment->code}}</td>
-                      <td>{{$payment->user->name}}</td>
+                      <td>{{$payment->user->name ?? "Deleted"}}</td>
                       <td>{{$payment->amount}}</td>
+                      <td>{{$payment->description}}</td>
+                      <td>{{$payment->created_at->diffForHumans()}}</td>
                       <td>
-                        <a class="btn btn-success" href="#" >view</a>
-                        <a class="btn btn-primary" href="#" >Edit</a>
-                        <a class="btn btn-danger" href="#" >Delete</a>
+
+                        <!-- <a class="btn btn-primary" href="#" >Edit</a> -->
+                        <a class="btn btn-danger" href="{{route('admin.payments.delete',$payment->id)}}" >Delete</a>
                       </td>
                     </tr>
 @endforeach

@@ -1,6 +1,9 @@
 @extends('layouts.admin')
                   @section('content')
                     <div class="container-fluid">
+                      @if(session()->has('success'))
+                   <div class="alert alert-success">{{session('success')}}</div>
+                      @endif
                         <h1 class="mt-4">Dashboard</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Dashboard</li>
@@ -102,9 +105,9 @@
                                                 <td>{{$user->email}}</td>
                                                 <td>{{$user->roles->first()->name ?? "Client"}}</td>
                                                 <td>
-                                                  <a class="btn btn-success" href="#" >view</a>
-                                                  <a class="btn btn-primary" href="#" >Edit</a>
-                                                  <a class="btn btn-danger" href="#" >Delete</a>
+                                                  <a class="btn btn-success" href="{{route('admin.user.view',$user->id)}}" >view</a>
+                                                  <a class="btn btn-primary" href="{{route('admin.user.edit',$user->id)}}"  >Edit</a>
+                                                  <a class="btn btn-danger" href="{{route('admin.user.delete',$user->id)}}"  >Delete</a>
                                                 </td>
 
                                             </tr>

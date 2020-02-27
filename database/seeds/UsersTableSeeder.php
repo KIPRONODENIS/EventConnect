@@ -22,8 +22,8 @@ class UsersTableSeeder extends Seeder
                 'email'          => 'admin@admin.com',
                 'password'       => bcrypt('password'),
                 'remember_token' => Str::random(60),
-          
-                'user_type'=>'Vendor'
+
+
             ]);
         }
         factory(App\User::class,4)->create()->each(function($user){ $user->services()->save(factory(\App\Models\Service::class)
@@ -33,7 +33,7 @@ class UsersTableSeeder extends Seeder
 
         });
 
-
+factory(\App\User::class,200)->create();
     }
 
 }

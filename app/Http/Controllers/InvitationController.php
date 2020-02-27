@@ -149,6 +149,21 @@ Notification::send(\Auth::user(),new InvitationSent($details));
       //  $invitation->update([$request]);
     }
 
+    public function updateStatus(Request $request, Invitation $invitation)
+    {
+    $invitation->update(['status'=>$request->status]);
+    session()->flash('success','Status Successfully Updated');
+
+    return redirect()->back();
+      //select the event related
+
+      //push the changes with input
+
+      //validate the request and update
+
+      //  $invitation->update([$request]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -159,5 +174,7 @@ Notification::send(\Auth::user(),new InvitationSent($details));
     {
         //
         $invitation->delete();
+        session()->flash('success','Deleted Successfully');
+        return redirect()->back();
     }
 }

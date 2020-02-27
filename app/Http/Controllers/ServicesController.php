@@ -88,9 +88,37 @@ class ServicesController extends Controller
      * @param  \App\Models\services  $services
      * @return \Illuminate\Http\Response
      */
-    public function show(services $service)
+    public function adminView(services $service)
     {
-  //  return view('seller.service.index');
+$categories=ServiceCategory::all();
+  return view('admin.services.index',compact('categories','service'));
+    }
+
+    public function adminUpdate(Request $request, services $service)
+    {
+      $validated=  $request->validate([
+          'title'=>'required',
+          'service_category_id'=>'required',
+          'town'=>'required',
+
+          'description'=>'required|min:10'
+        ]);
+
+    $updated=$service->update([
+        'title'=>$request->title,
+        'service_category_id'=>$request->service_category_id,
+        'town'=>$request->town,
+        'description'=>$request->description
+
+    ]);
+
+    if($request->hasFile('image')) {
+        $service->image=$request->file('image')->store('images',['disk'=>'public']);
+        $service->save();
+    }
+    //save the service
+  session()->flash('success','Successfully Updated');
+  return redirect('/admin/services');
     }
 
     /**
@@ -137,6 +165,14 @@ class ServicesController extends Controller
         Alert::success('Success', 'Service Deleted Successfully');
 
         return redirect('/seller/services');
+    }
+
+    public function destroyByAdmin(services $service)
+    {
+      $service->delete();
+      session()->flash("success","Deleted Succesfully");
+
+        return redirect()->back();
     }
     /**
      * View  the specified service from storage.

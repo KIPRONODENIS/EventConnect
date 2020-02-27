@@ -80,6 +80,8 @@ class PaymentController extends Controller
      */
     public function destroy(Payment $payment)
     {
-        //
+      $payment->delete();
+      session()->flash('success','Successfully Deleted Payment');
+    return   redirect()->back();
     }
 }

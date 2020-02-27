@@ -18,6 +18,7 @@ class RolePermissionTableSeeder extends Seeder
          Permission::create(['name' => 'add services']);
          // this can be done as separate statements
         $role = Role::create(['name' => 'Vendor']);
+        $role = Role::create(['name' => 'client']);
         $role->givePermissionTo('add services');
 
           $role1 = Role::create(['name' => 'Admin']);
