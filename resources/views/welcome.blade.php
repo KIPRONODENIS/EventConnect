@@ -11,7 +11,7 @@
     <h3 class="text-2xl mb-8 text-gray-200">
     Over thousand event service providers
     </h3>
-    <example-component></example-component>
+  
 @guest
 <a href={{route('register')}} class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider">
   Become a vendor

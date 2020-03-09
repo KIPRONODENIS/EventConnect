@@ -19,11 +19,11 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
-
+<script src="{{asset('/js/jquery.min.js')}}"></script>
 
 </head>
 <body>
-    <div>
+    <div id="app">
   @component('components.nav')
 
   @endcomponent
@@ -39,7 +39,7 @@
 
 @livewireAssets
 @include('sweetalert::alert')
-<script src="{{asset('/js/jquery.min.js')}}"></script>
+
 <script src="{{ asset('js/app.js') }}" ></script>
 
 </body>

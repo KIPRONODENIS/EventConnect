@@ -59,7 +59,7 @@ class InvitationController extends Controller
      */
     public function store(Request $request)
     {
-
+$request->validate(['event'=>'required']);
      //recieve the event //
      $event=\App\Event::find($request->event);
 

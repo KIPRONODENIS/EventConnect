@@ -7,6 +7,9 @@
 <form method="post" action="{{route('invite.create')}}">
   {{csrf_field()}}
 <input type="hidden" name="service_id" value="{{session('id')}}">
+@error('event')
+<div>Please Create an event by clicking add event</div>
+@enderror
 <select name="event" class="form-control m-3 pr-3 lineHeight-40">
  @empty($events)
   <option>Non selected</option>
