@@ -14,7 +14,7 @@ $(document).ready(function(){
 </script>
 @endsection
 @section('body')
-    <div class="container">
+    <div class="container h-screen">
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">

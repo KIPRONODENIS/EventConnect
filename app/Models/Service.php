@@ -3,11 +3,11 @@
 namespace App\Models;
 use willvincent\Rateable\Rateable;
 use Illuminate\Database\Eloquent\Model;
-
+use Laravelista\Comments\Commentable;
 
 class Service extends Model
 {
-    use Rateable;
+    use Rateable,Commentable;
     protected $guarded=[];
 
     public function user() {

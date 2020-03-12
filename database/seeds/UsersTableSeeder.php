@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
 
             ]);
         }
-        factory(App\User::class,4)->create()->each(function($user){ $user->services()->save(factory(\App\Models\Service::class)
+        factory(App\User::class,6)->create()->each(function($user){ $user->services()->save(factory(\App\Models\Service::class)
           ->create(['user_id'=>$user->id]));
      $service=$user->services;
      $service->each(function($service){$service->invitations()->save(factory(App\Invitation::class)->create(['service_id'=>$service->id]));});

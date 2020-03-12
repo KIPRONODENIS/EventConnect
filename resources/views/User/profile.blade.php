@@ -17,31 +17,11 @@
   <a href="{{route('invite',$service->id)}}" class="btn btn-success mt-4 p-2">Get this service</a>
  </div>
 </div>
-<div class="w-100 bg-gray-200 card pl-20">
-<h1 class="h4 my-4 uppercase font-bold">Also From <a href="#" class="text-blue-400"><a></h1>
-@foreach($services as $item)
-@component('components.service')
-
-@slot('title')
+<div class="w-50 mt-3 bg-gray-200 card pl-20">
 
 
-{{$item->title}}
-@endslot
-@slot('id')
+	@comments(['model' => $service])
 
-{{$item->id}}
-@endslot
-
-@slot('views')
-{{$item->views->count()}}
-@endslot
-
-@slot('description')
-{{$item->description}}
-@endslot
-
-@endcomponent
-@endforeach
 </div>
 
 @endsection

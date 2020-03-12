@@ -17,6 +17,7 @@
         "laravel/tinker": "^1.0",
         "laravel/ui": "^1.1",
         "laraveldaily/laravel-charts": "^0.1.13",
+        "laravelista/comments": "^3.3",
         "livewire/livewire": "^0.4.0",
         "musonza/chat": "^4.2",
         "nagy/laravel-rating": "^1.3",

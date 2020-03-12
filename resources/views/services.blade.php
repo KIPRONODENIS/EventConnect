@@ -16,40 +16,55 @@
   </div>
   <div class="w-2/3 flex flex-wrap">
 @foreach( $allServices as $item)
+
 @component('components.service')
 
 @slot('title')
 
 {{$item->title}}
 @endslot
+
+@slot('views')
+{{$item->views->count()}}
+@endslot
 @slot('id')
 
+@slot('image')
+{{$item->image}}
+@endslot
 {{$item->id}}
 @endslot
-
 
 @slot('description')
 
 {{$item->description}}
 @endslot
 
-@slot('image')
-{{$item->image}}
+@slot('location')
+
+{{$item->town}}
 @endslot
 
-@slot('views')
-{{$item->views->count()}}
+@slot('price')
+
+{{$item->price}}
+@endslot
+
+@slot('owner')
+
+{{$item->user->name}}
 @endslot
 
 @endcomponent
+
 @endforeach
 
-
-</div>
-</div>
-<div class=" inline-block text-center mx-auto py-4 ">
+<div class="  mx-auto  w-100  ">
 
   {{$allServices->links()}}
 
 </div>
+</div>
+</div>
+
 @endsection

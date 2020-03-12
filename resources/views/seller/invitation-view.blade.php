@@ -2,7 +2,7 @@
 
 
 @section('body')
-    <div class="w-2/5 mx-auto" id="app">
+    <div class="w-2/5 mx-auto h-screen" id="app">
 
 
                        <div class="p-3">

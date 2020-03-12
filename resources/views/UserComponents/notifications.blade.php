@@ -18,9 +18,11 @@
           <div class="tab-pane fade show active p-3" id="unread" role="tabpanel" aria-labelledby="one-tab">
 @if(Auth::user()->unreadNotifications->count()>0)
   @foreach(Auth::user()->unreadNotifications as $n)
+  <div class="alert alert-success my-2">
             <h5 class="card-title">{{$n->data['title']}}</h5>
             <p class="card-text">{{$n->data['msg']}}</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+       
     @endforeach
     @else
     <div class="alert alert-info">They are no new notifications</div>

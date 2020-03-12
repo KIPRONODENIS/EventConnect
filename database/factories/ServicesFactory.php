@@ -13,7 +13,7 @@ $factory->define(Service::class, function (Faker $faker) {
          return $data[array_rand($data)];
         },
         'service_category_id'=> factory(\App\ServiceCategory::class)->create()->id,
-        'image'=>'services/January2020/kj2jlRYq8vpLwpGR9k2S.jpg',
+        'image'=>'images/h7LcnCXdl9uIkGCg4PKnzm7JXJOCLN40upgN0wPC.jpeg',
         'description'=>$faker->text(30),
         'town'=>$faker->city
 

@@ -50,7 +50,11 @@
       </label>
     </div>
     <div class="md:w-2/3">
-      <input name="event_date" value="{{old('event_date') ?? $event->event_date}}" class="form-control" id="inline-full-name" type="date" placeholder="12/12/2019">
+      <input name="event_date" value="{{old('event_date') ?? $event->event_date}}" class="form-control" id="inline-full-name" type="date" placeholder="12/12/2019" 
+
+      min="@php echo date('Y-m-d'); @endphp">
+
+  
     </div>
   </div>
 

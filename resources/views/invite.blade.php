@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('body')
-<div class="d-flex py-5 mx-4">
+<div class="d-flex py-5 mx-4 h-screen">
 <div class="col-4 p-3 " >
 <h1 class="text-teal-700 uppercase m-3">Select the event</h1>
 <form method="post" action="{{route('invite.create')}}">
